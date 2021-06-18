@@ -2,7 +2,8 @@ package com.ventura.bracketslib.utility;
 
 import android.util.DisplayMetrics;
 
-import com.ventura.emilp.tournamentbrackets.application.BracketsApplication;
+import com.ventura.bracketslib.application.BracketsApplication;
+
 
 /**
  * Created by Emil on 21/10/17.
