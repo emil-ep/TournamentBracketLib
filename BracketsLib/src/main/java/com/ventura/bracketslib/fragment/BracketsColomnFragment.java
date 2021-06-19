@@ -1,6 +1,7 @@
 package com.ventura.bracketslib.fragment;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ventura.bracketslib.R;
 import com.ventura.bracketslib.adapter.BracketsCellAdapter;
+import com.ventura.bracketslib.application.BracketsApplication;
 import com.ventura.bracketslib.model.ColomnData;
 import com.ventura.bracketslib.model.MatchData;
 import com.ventura.bracketslib.utility.BracketsUtility;
@@ -74,18 +76,23 @@ public class BracketsColomnFragment extends Fragment {
     private void setInitialHeightForList() {
         for (MatchData data : list){
             if (sectionNumber == 0){
-                data.setHeight(BracketsUtility.dpToPx(131));
+                data.setHeight(dpToPx(131));
             }else if (sectionNumber == 1 && previousBracketSize != list.size()){
-                data.setHeight(BracketsUtility.dpToPx(262));
+                data.setHeight(dpToPx(262));
             }else if (sectionNumber == 1 && previousBracketSize == list.size()) {
-                data.setHeight(BracketsUtility.dpToPx(131));
+                data.setHeight(dpToPx(131));
             } else if (previousBracketSize > list.size()) {
-                data.setHeight(BracketsUtility.dpToPx(262));
+                data.setHeight(dpToPx(262));
             }else if (previousBracketSize == list.size()) {
-                data.setHeight(BracketsUtility.dpToPx(131));
+                data.setHeight(dpToPx(131));
             }
         }
 
+    }
+
+    private int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     public void expandHeight(int height) {
