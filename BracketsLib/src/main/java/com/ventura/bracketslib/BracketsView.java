@@ -25,11 +25,11 @@ public class BracketsView extends FrameLayout {
     private BracketsFragment bracketFragment;
     private AppCompatActivity mActivity;
 
-    public BracketsView(Context context, AppCompatActivity activity) {
-        super(context);
-        this.mContext = context;
+    public BracketsView(AppCompatActivity activity) {
+        super(activity);
+        this.mContext = activity;
         this.mActivity = activity;
-        init(context);
+        init(this.mContext);
     }
 
     public BracketsView(Context context, AttributeSet attrs) {

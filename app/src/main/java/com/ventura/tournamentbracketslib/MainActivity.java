@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initialiseBracketsFragment() {
-        BracketsView bracketsView = new BracketsView(this, this);
+        BracketsView bracketsView = new BracketsView(this);
 
         BracketsFragment bracketsFragment = new BracketsFragment();
         ArrayList<ColomnData> sectionList = new ArrayList<>();
