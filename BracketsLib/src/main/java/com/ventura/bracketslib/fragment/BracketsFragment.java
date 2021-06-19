@@ -45,8 +45,14 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initViews();
-        setData();
+//        setData();
         intialiseViewPagerAdapter();
+    }
+
+    public void setBrackets(int numberOfColumns, List<ColomnData> columnDataList) {
+        sectionList.addAll(columnDataList);
+        if (sectionAdapter != null)
+            sectionAdapter.notifyDataSetChanged();
     }
 
     private void setData() {
@@ -62,9 +68,9 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
         CompetitorData competitorSix = new CompetitorData("Liverpool", "4");
         CompetitorData competitorSeven = new CompetitorData("West ham ", "2");
         CompetitorData competitorEight = new CompetitorData("Bayern munich", "1");
-        MatchData matchData1 = new MatchData(competitorOne,competitorTwo);
+        MatchData matchData1 = new MatchData(competitorOne, competitorTwo);
         MatchData matchData2 = new MatchData(competitorThree, competitorFour);
-        MatchData matchData3 = new MatchData(competitorFive,competitorSix);
+        MatchData matchData3 = new MatchData(competitorFive, competitorSix);
         MatchData matchData4 = new MatchData(competitorSeven, competitorEight);
         Colomn1matchesList.add(matchData1);
         Colomn1matchesList.add(matchData2);
@@ -76,7 +82,7 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
         CompetitorData competitorTen = new CompetitorData("Chelsea", "4");
         CompetitorData competitorEleven = new CompetitorData("Liverpool", "2");
         CompetitorData competitorTwelve = new CompetitorData("westham", "1");
-        MatchData matchData5 = new MatchData(competitorNine,competitorTen);
+        MatchData matchData5 = new MatchData(competitorNine, competitorTen);
         MatchData matchData6 = new MatchData(competitorEleven, competitorTwelve);
         colomn2MatchesList.add(matchData5);
         colomn2MatchesList.add(matchData6);
@@ -93,7 +99,7 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
 
     private void intialiseViewPagerAdapter() {
 
-        sectionAdapter = new BracketsSectionAdapter(getChildFragmentManager(),this.sectionList);
+        sectionAdapter = new BracketsSectionAdapter(getChildFragmentManager(), this.sectionList);
         viewPager.setOffscreenPageLimit(10);
         viewPager.setAdapter(sectionAdapter);
         viewPager.setCurrentItem(0);
@@ -107,6 +113,7 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
     private void initViews() {
 
         viewPager = (WrapContentHeightViewPager) getView().findViewById(R.id.container);
+        sectionList = new ArrayList<>();
     }
 
     @Override
