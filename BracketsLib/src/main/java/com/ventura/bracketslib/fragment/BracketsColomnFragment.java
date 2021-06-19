@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ventura.bracketslib.R;
 import com.ventura.bracketslib.adapter.BracketsCellAdapter;
-import com.ventura.bracketslib.application.BracketsApplication;
 import com.ventura.bracketslib.model.ColomnData;
 import com.ventura.bracketslib.model.MatchData;
-import com.ventura.bracketslib.utility.BracketsUtility;
 
 import java.util.ArrayList;
 

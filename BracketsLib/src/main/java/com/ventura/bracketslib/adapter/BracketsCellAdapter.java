@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.ventura.bracketslib.R;
 import com.ventura.bracketslib.fragment.BracketsColomnFragment;
 import com.ventura.bracketslib.model.MatchData;

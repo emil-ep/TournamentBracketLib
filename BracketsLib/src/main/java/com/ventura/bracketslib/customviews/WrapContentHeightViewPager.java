@@ -8,8 +8,6 @@ import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.ventura.bracketslib.application.BracketsApplication;
-
 /**
  * Created by Emil on 21/10/17.
  */

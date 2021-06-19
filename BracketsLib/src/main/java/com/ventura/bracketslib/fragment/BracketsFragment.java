@@ -1,6 +1,5 @@
 package com.ventura.bracketslib.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -14,13 +13,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.ventura.bracketslib.R;
 import com.ventura.bracketslib.adapter.BracketsSectionAdapter;
-import com.ventura.bracketslib.application.BracketsApplication;
 import com.ventura.bracketslib.customviews.WrapContentHeightViewPager;
 import com.ventura.bracketslib.model.ColomnData;
 import com.ventura.bracketslib.model.CompetitorData;
 import com.ventura.bracketslib.model.MatchData;
-import com.ventura.bracketslib.utility.BracketsUtility;
-
 
 import java.util.ArrayList;
 import java.util.List;
