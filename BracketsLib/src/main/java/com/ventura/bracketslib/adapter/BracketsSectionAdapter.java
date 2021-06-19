@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-
 import com.ventura.bracketslib.fragment.BracketsColomnFragment;
 import com.ventura.bracketslib.model.ColomnData;
 

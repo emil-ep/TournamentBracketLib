@@ -21,6 +21,7 @@
             <com.ventura.bracketslib.customviews.WrapContentHeightViewPager
                 android:id="@+id/container"
                 android:layout_width="match_parent"
+                android:background="@color/bracket_background"
                 android:layout_height="match_parent" />
 
             <TextView

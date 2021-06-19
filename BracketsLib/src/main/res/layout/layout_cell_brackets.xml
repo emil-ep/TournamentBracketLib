@@ -47,7 +47,7 @@
             android:id="@+id/team_one_layout"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:background="#332929"
+            android:background="@color/bracket_color"
             android:layout_below="@+id/title_layout"
             android:gravity="center">
 
@@ -97,7 +97,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:background="#332929"
+            android:background="@color/bracket_color"
             android:layout_below="@+id/view"
             android:layout_marginTop="1dp"
             android:gravity="center">

@@ -1,10 +1,12 @@
 package com.ventura.bracketslib.fragment;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -15,8 +17,6 @@ import com.ventura.bracketslib.customviews.WrapContentHeightViewPager;
 import com.ventura.bracketslib.model.ColomnData;
 import com.ventura.bracketslib.model.CompetitorData;
 import com.ventura.bracketslib.model.MatchData;
-import com.ventura.bracketslib.utility.BracketsUtility;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +41,20 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
         return inflater.inflate(R.layout.fragment_brackts, container, false);
     }
 
+
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initViews();
-        setData();
+    public void onViewCreated(@NonNull  View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initViews(view);
+//        setData();
         intialiseViewPagerAdapter();
+    }
+
+    public void setBrackets(int numberOfColumns, List<ColomnData> columnDataList) {
+        sectionList = new ArrayList<>();
+        sectionList.addAll(columnDataList);
+//        if (sectionAdapter != null)
+//            sectionAdapter.notifyDataSetChanged();
     }
 
     private void setData() {
@@ -62,9 +70,9 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
         CompetitorData competitorSix = new CompetitorData("Liverpool", "4");
         CompetitorData competitorSeven = new CompetitorData("West ham ", "2");
         CompetitorData competitorEight = new CompetitorData("Bayern munich", "1");
-        MatchData matchData1 = new MatchData(competitorOne,competitorTwo);
+        MatchData matchData1 = new MatchData(competitorOne, competitorTwo);
         MatchData matchData2 = new MatchData(competitorThree, competitorFour);
-        MatchData matchData3 = new MatchData(competitorFive,competitorSix);
+        MatchData matchData3 = new MatchData(competitorFive, competitorSix);
         MatchData matchData4 = new MatchData(competitorSeven, competitorEight);
         Colomn1matchesList.add(matchData1);
         Colomn1matchesList.add(matchData2);
@@ -76,7 +84,7 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
         CompetitorData competitorTen = new CompetitorData("Chelsea", "4");
         CompetitorData competitorEleven = new CompetitorData("Liverpool", "2");
         CompetitorData competitorTwelve = new CompetitorData("westham", "1");
-        MatchData matchData5 = new MatchData(competitorNine,competitorTen);
+        MatchData matchData5 = new MatchData(competitorNine, competitorTen);
         MatchData matchData6 = new MatchData(competitorEleven, competitorTwelve);
         colomn2MatchesList.add(matchData5);
         colomn2MatchesList.add(matchData6);
@@ -93,7 +101,7 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
 
     private void intialiseViewPagerAdapter() {
 
-        sectionAdapter = new BracketsSectionAdapter(getChildFragmentManager(),this.sectionList);
+        sectionAdapter = new BracketsSectionAdapter(getChildFragmentManager(), this.sectionList);
         viewPager.setOffscreenPageLimit(10);
         viewPager.setAdapter(sectionAdapter);
         viewPager.setCurrentItem(0);
@@ -102,11 +110,18 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
         viewPager.setFadingEdgeLength(50);
 
         viewPager.addOnPageChangeListener(this);
+        sectionAdapter.notifyDataSetChanged();
     }
 
-    private void initViews() {
+    private void initViews(View view) {
 
-        viewPager = (WrapContentHeightViewPager) getView().findViewById(R.id.container);
+        viewPager = view.findViewById(R.id.container);
+
+    }
+
+    public int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     @Override
@@ -120,11 +135,11 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
                     mNextSelectedScreen = position + 1;
                     //update view here
                     if (getBracketsFragment(position).getColomnList().get(0).getHeight()
-                            != BracketsUtility.dpToPx(131))
-                        getBracketsFragment(position).shrinkView(BracketsUtility.dpToPx(131));
+                            != dpToPx(131))
+                        getBracketsFragment(position).shrinkView(dpToPx(131));
                     if (getBracketsFragment(position + 1).getColomnList().get(0).getHeight()
-                            != BracketsUtility.dpToPx(131))
-                        getBracketsFragment(position + 1).shrinkView(BracketsUtility.dpToPx(131));
+                            != dpToPx(131))
+                        getBracketsFragment(position + 1).shrinkView(dpToPx(131));
                 }
             } else {
                 // Closer to current screen than to next
@@ -134,14 +149,14 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
 
                     if (getBracketsFragment(position + 1).getCurrentBracketSize() ==
                             getBracketsFragment(position + 1).getPreviousBracketSize()) {
-                        getBracketsFragment(position + 1).shrinkView(BracketsUtility.dpToPx(131));
-                        getBracketsFragment(position).shrinkView(BracketsUtility.dpToPx(131));
+                        getBracketsFragment(position + 1).shrinkView(dpToPx(131));
+                        getBracketsFragment(position).shrinkView(dpToPx(131));
                     } else {
                         int currentFragmentSize = getBracketsFragment(position + 1).getCurrentBracketSize();
                         int previousFragmentSize = getBracketsFragment(position + 1).getPreviousBracketSize();
                         if (currentFragmentSize != previousFragmentSize) {
-                            getBracketsFragment(position + 1).expandHeight(BracketsUtility.dpToPx(262));
-                            getBracketsFragment(position).shrinkView(BracketsUtility.dpToPx(131));
+                            getBracketsFragment(position + 1).expandHeight(dpToPx(262));
+                            getBracketsFragment(position).shrinkView(dpToPx(131));
                         }
                     }
                 }

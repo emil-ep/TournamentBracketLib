@@ -1,10 +1,16 @@
-package com.ventura.tournamentbracketslib;
+package com.ventura.bracketslib;
 
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-
-import com.ventura.bracketslib.BracketsView;
 import com.ventura.bracketslib.fragment.BracketsFragment;
 import com.ventura.bracketslib.model.ColomnData;
 import com.ventura.bracketslib.model.CompetitorData;
@@ -12,19 +18,53 @@ import com.ventura.bracketslib.model.MatchData;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class BracketsView extends FrameLayout {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    private View view;
+    private Context mContext;
+    private BracketsFragment bracketFragment;
+    private AppCompatActivity mActivity;
+
+    public BracketsView(AppCompatActivity activity) {
+        super(activity);
+        this.mContext = activity;
+        this.mActivity = activity;
+        init(this.mContext);
+    }
+
+    public BracketsView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        this.mContext = context;
+        this.mActivity = (AppCompatActivity) this.mContext;
+        init(context);
+    }
+
+
+    public BracketsView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        this.mContext = context;
+        this.mActivity = (AppCompatActivity) this.mContext;
+        init(context);
+    }
+
+    private void init(Context context) {
+        this.view = this;
+        inflate(mContext, R.layout.layout_bracket_view, this);
         initialiseBracketsFragment();
+        setBracketsData();
     }
 
     private void initialiseBracketsFragment() {
-        BracketsView bracketsView = new BracketsView(this);
+        bracketFragment = new BracketsFragment();
+        FragmentManager manager = this.mActivity.getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.container, bracketFragment, "brackets_home_fragment");
+        transaction.commit();
+        manager.executePendingTransactions();
+    }
 
-        BracketsFragment bracketsFragment = new BracketsFragment();
+    public void setBracketsData(){
+//        BracketsFragment bracketsFragment = new BracketsFragment();
         ArrayList<ColomnData> sectionList = new ArrayList<>();
         ArrayList<MatchData> Colomn1matchesList = new ArrayList<>();
         ArrayList<MatchData> colomn2MatchesList = new ArrayList<>();
@@ -64,6 +104,6 @@ public class MainActivity extends AppCompatActivity {
         ColomnData colomnData3 = new ColomnData(colomn3MatchesList);
         sectionList.add(colomnData3);
 
-//        bracketsFragment.setBrackets(3, sectionList);
+        bracketFragment.setBrackets(3, sectionList);
     }
 }

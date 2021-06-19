@@ -8,8 +8,6 @@ import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.ventura.bracketslib.application.BracketsApplication;
-
 /**
  * Created by Emil on 21/10/17.
  */
@@ -25,6 +23,7 @@ public class WrapContentHeightViewPager extends ViewPager {
 
     public WrapContentHeightViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
 
     @Override
@@ -42,9 +41,9 @@ public class WrapContentHeightViewPager extends ViewPager {
 
             if (h > height) height = h;
 
-            int screenHeight = BracketsApplication.getInstance().getScreenHeight();
-            if (screenHeight > height)
-                height = screenHeight;
+            int[] screenSIze = getScreenSIze();
+            if (screenSIze[1] > height)
+                height = screenSIze[1];
             //overriding wrap content feature
             // int[] screenSize = getScreenSIze();
             // height = 1800;
