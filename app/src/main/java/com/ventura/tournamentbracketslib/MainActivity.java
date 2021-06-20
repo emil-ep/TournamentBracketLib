@@ -22,48 +22,48 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initialiseBracketsFragment() {
-        BracketsView bracketsView = new BracketsView(this);
-
-        BracketsFragment bracketsFragment = new BracketsFragment();
+//        BracketsView bracketsView = new BracketsView(this);
+        BracketsView bracketsView = findViewById(R.id.bracket_view);
+//        bracketsView.setBracketBackground();
         ArrayList<ColomnData> sectionList = new ArrayList<>();
-        ArrayList<MatchData> Colomn1matchesList = new ArrayList<>();
-        ArrayList<MatchData> colomn2MatchesList = new ArrayList<>();
-        ArrayList<MatchData> colomn3MatchesList = new ArrayList<>();
-        CompetitorData competitorOne = new CompetitorData("Manchester United Fc", "2");
-        CompetitorData competitorTwo = new CompetitorData("Arsenal", "1");
-        CompetitorData competitorThree = new CompetitorData("Chelsea", "2");
-        CompetitorData competitorFour = new CompetitorData("Tottenham", "1");
-        CompetitorData competitorFive = new CompetitorData("Manchester FC", "2");
-        CompetitorData competitorSix = new CompetitorData("Liverpool", "4");
-        CompetitorData competitorSeven = new CompetitorData("West ham ", "2");
-        CompetitorData competitorEight = new CompetitorData("Bayern munich", "1");
-        MatchData matchData1 = new MatchData(competitorOne, competitorTwo);
-        MatchData matchData2 = new MatchData(competitorThree, competitorFour);
-        MatchData matchData3 = new MatchData(competitorFive, competitorSix);
-        MatchData matchData4 = new MatchData(competitorSeven, competitorEight);
-        Colomn1matchesList.add(matchData1);
-        Colomn1matchesList.add(matchData2);
-        Colomn1matchesList.add(matchData3);
-        Colomn1matchesList.add(matchData4);
-        ColomnData colomnData1 = new ColomnData(Colomn1matchesList);
+        ArrayList<MatchData> semiFinal = new ArrayList<>();
+        ArrayList<MatchData> finals = new ArrayList<>();
+        ArrayList<MatchData> winner = new ArrayList<>();
+        CompetitorData manchesterUnitedFc = new CompetitorData("Manchester United Fc", "2");
+        CompetitorData arsenal = new CompetitorData("Arsenal", "1");
+        CompetitorData chelsea = new CompetitorData("Chelsea", "2");
+        CompetitorData tottenham = new CompetitorData("Tottenham", "1");
+        CompetitorData manchesterFc = new CompetitorData("Manchester FC", "2");
+        CompetitorData liverpool = new CompetitorData("Liverpool", "4");
+        CompetitorData westHam = new CompetitorData("West ham ", "2");
+        CompetitorData bayernMunich = new CompetitorData("Bayern munich", "1");
+        MatchData matchData1 = new MatchData(manchesterUnitedFc, arsenal);
+        MatchData matchData2 = new MatchData(chelsea, tottenham);
+        MatchData matchData3 = new MatchData(manchesterFc, liverpool);
+        MatchData matchData4 = new MatchData(westHam, bayernMunich);
+        semiFinal.add(matchData1);
+        semiFinal.add(matchData2);
+        semiFinal.add(matchData3);
+        semiFinal.add(matchData4);
+        ColomnData colomnData1 = new ColomnData(semiFinal);
         sectionList.add(colomnData1);
-        CompetitorData competitorNine = new CompetitorData("Manchester United Fc", "2");
-        CompetitorData competitorTen = new CompetitorData("Chelsea", "4");
-        CompetitorData competitorEleven = new CompetitorData("Liverpool", "2");
-        CompetitorData competitorTwelve = new CompetitorData("westham", "1");
-        MatchData matchData5 = new MatchData(competitorNine, competitorTen);
-        MatchData matchData6 = new MatchData(competitorEleven, competitorTwelve);
-        colomn2MatchesList.add(matchData5);
-        colomn2MatchesList.add(matchData6);
-        ColomnData colomnData2 = new ColomnData(colomn2MatchesList);
+        CompetitorData manchesterUnitedFcFinal = new CompetitorData("Manchester United Fc", "2");
+        CompetitorData chelseaFinal = new CompetitorData("Chelsea", "4");
+        CompetitorData liverpoolFinal = new CompetitorData("Liverpool", "2");
+        CompetitorData westhamFinal = new CompetitorData("westham", "1");
+        MatchData matchData5 = new MatchData(manchesterUnitedFcFinal, chelseaFinal);
+        MatchData matchData6 = new MatchData(liverpoolFinal, westhamFinal);
+        finals.add(matchData5);
+        finals.add(matchData6);
+        ColomnData colomnData2 = new ColomnData(finals);
         sectionList.add(colomnData2);
         CompetitorData competitorThirteen = new CompetitorData("Chelsea", "2");
         CompetitorData competitorForteen = new CompetitorData("Liverpool", "1");
         MatchData matchData7 = new MatchData(competitorThirteen, competitorForteen);
-        colomn3MatchesList.add(matchData7);
-        ColomnData colomnData3 = new ColomnData(colomn3MatchesList);
+        winner.add(matchData7);
+        ColomnData colomnData3 = new ColomnData(winner);
         sectionList.add(colomnData3);
 
-//        bracketsFragment.setBrackets(3, sectionList);
+        bracketsView.setBracketsData(sectionList);
     }
 }

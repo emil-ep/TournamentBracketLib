@@ -32,6 +32,13 @@ public class BracketsColomnFragment extends Fragment {
     private RecyclerView bracketsRV;
 
     private BracketsCellAdapter adapter;
+    private int bracketColor;
+    private int textColor;
+
+    public BracketsColomnFragment(int bracketColor, int textColor) {
+        this.bracketColor = bracketColor;
+        this.textColor = textColor;
+    }
 
 
     @Nullable
@@ -111,6 +118,8 @@ public class BracketsColomnFragment extends Fragment {
 
 //        pBar.setVisibility(View.GONE);
          adapter = new BracketsCellAdapter(this, getContext(), list);
+         adapter.setBracketColor(bracketColor);
+         adapter.setTextColor(textColor);
         if (bracketsRV != null) {
             bracketsRV.setHasFixedSize(true);
             bracketsRV.setNestedScrollingEnabled(false);
