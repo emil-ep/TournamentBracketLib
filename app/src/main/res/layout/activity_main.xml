@@ -9,6 +9,7 @@
     <com.ventura.bracketslib.BracketsView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:bracketBackgroundColor="#e62712"
          />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

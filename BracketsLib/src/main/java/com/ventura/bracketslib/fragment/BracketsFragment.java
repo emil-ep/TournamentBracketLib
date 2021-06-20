@@ -33,12 +33,21 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
     private ArrayList<ColomnData> sectionList;
     private int mNextSelectedScreen;
     private int mCurrentPagerState;
+    private int backgroundColor, bracketColor, textColor;
+
+    public BracketsFragment(int backgroundColor, int bracketColor, int textColor){
+        this.backgroundColor = backgroundColor;
+        this.bracketColor = bracketColor;
+        this.textColor = textColor;
+    }
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_brackts, container, false);
+        View view = inflater.inflate(R.layout.fragment_brackts, container, false);
+        view.setBackgroundColor(backgroundColor);
+        return view;
     }
 
 
