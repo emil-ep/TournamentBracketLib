@@ -10,9 +10,8 @@
         android:id="@+id/bracket_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:bracketBackgroundColor="#e62712"
-        app:bracketColor="#09d940"
-        app:bracketTextColor="#f205ea"
-         />
+        app:bracketBackgroundColor="#1c222e"
+        app:bracketColor="#262e40"
+        app:bracketTextColor="#fff" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

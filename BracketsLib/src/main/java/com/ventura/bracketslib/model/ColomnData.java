@@ -2,6 +2,7 @@ package com.ventura.bracketslib.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Emil on 21/10/17.
@@ -9,17 +10,17 @@ import java.util.ArrayList;
 
 public class ColomnData implements Serializable{
 
-    public ColomnData(ArrayList<MatchData> matches) {
+    public ColomnData(List<MatchData> matches) {
         this.matches = matches;
     }
 
-    private ArrayList<MatchData> matches;
+    private List<MatchData> matches;
 
     public void setMatches(ArrayList<MatchData> matches) {
         this.matches = matches;
     }
 
-    public ArrayList<MatchData> getMatches() {
+    public List<MatchData> getMatches() {
         return matches;
     }
 }
