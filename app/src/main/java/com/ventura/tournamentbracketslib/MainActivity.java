@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initialiseBracketsFragment() {
-        BracketsView bracketsView = new BracketsView(this);
-
+//        BracketsView bracketsView = new BracketsView(this);
+        BracketsView bracketsView = findViewById(R.id.bracket_view);
+//        bracketsView.setBracketBackground();
         ArrayList<ColomnData> sectionList = new ArrayList<>();
         ArrayList<MatchData> semiFinal = new ArrayList<>();
         ArrayList<MatchData> finals = new ArrayList<>();

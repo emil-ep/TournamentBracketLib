@@ -25,8 +25,11 @@ public class BracketsCellAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Context context;
     private ArrayList<MatchData> list;
     private boolean handler;
+    private int bracketColor;
+    private int textColor;
 
-    public BracketsCellAdapter(BracketsColomnFragment bracketsColomnFragment, Context context, ArrayList<MatchData> list) {
+    public BracketsCellAdapter(BracketsColomnFragment bracketsColomnFragment, Context context,
+                               ArrayList<MatchData> list) {
 
         this.fragment = bracketsColomnFragment;
         this.context = context;
@@ -37,7 +40,7 @@ public class BracketsCellAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.layout_cell_brackets, parent, false);
-        return new BracketsCellViewHolder(view);
+        return new BracketsCellViewHolder(view, bracketColor, textColor);
     }
 
     @Override
@@ -71,5 +74,13 @@ public class BracketsCellAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void setList(ArrayList<MatchData> colomnList) {
         this.list = colomnList;
         notifyDataSetChanged();
+    }
+
+    public void setBracketColor(int bracketColor) {
+        this.bracketColor = bracketColor;
+    }
+
+    public void setTextColor(int textColor) {
+        this.textColor = textColor;
     }
 }

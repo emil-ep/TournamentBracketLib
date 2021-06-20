@@ -33,12 +33,21 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
     private ArrayList<ColomnData> sectionList;
     private int mNextSelectedScreen;
     private int mCurrentPagerState;
+    private int backgroundColor, bracketColor, textColor;
+    private WrapContentHeightViewPager wrapContentHeightViewPager;
+
+    public BracketsFragment(int backgroundColor, int bracketColor, int textColor){
+        this.backgroundColor = backgroundColor;
+        this.bracketColor = bracketColor;
+        this.textColor = textColor;
+    }
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_brackts, container, false);
+        View view = inflater.inflate(R.layout.fragment_brackts, container, false);
+        return view;
     }
 
 
@@ -46,62 +55,18 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
     public void onViewCreated(@NonNull  View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
-//        setData();
         intialiseViewPagerAdapter();
     }
 
     public void setBrackets(List<ColomnData> columnDataList) {
         sectionList = new ArrayList<>();
         sectionList.addAll(columnDataList);
-//        if (sectionAdapter != null)
-//            sectionAdapter.notifyDataSetChanged();
-    }
-
-    private void setData() {
-        sectionList = new ArrayList<>();
-        ArrayList<MatchData> Colomn1matchesList = new ArrayList<>();
-        ArrayList<MatchData> colomn2MatchesList = new ArrayList<>();
-        ArrayList<MatchData> colomn3MatchesList = new ArrayList<>();
-        CompetitorData competitorOne = new CompetitorData("Manchester United Fc", "2");
-        CompetitorData competitorTwo = new CompetitorData("Arsenal", "1");
-        CompetitorData competitorThree = new CompetitorData("Chelsea", "2");
-        CompetitorData competitorFour = new CompetitorData("Tottenham", "1");
-        CompetitorData competitorFive = new CompetitorData("Manchester FC", "2");
-        CompetitorData competitorSix = new CompetitorData("Liverpool", "4");
-        CompetitorData competitorSeven = new CompetitorData("West ham ", "2");
-        CompetitorData competitorEight = new CompetitorData("Bayern munich", "1");
-        MatchData matchData1 = new MatchData(competitorOne, competitorTwo);
-        MatchData matchData2 = new MatchData(competitorThree, competitorFour);
-        MatchData matchData3 = new MatchData(competitorFive, competitorSix);
-        MatchData matchData4 = new MatchData(competitorSeven, competitorEight);
-        Colomn1matchesList.add(matchData1);
-        Colomn1matchesList.add(matchData2);
-        Colomn1matchesList.add(matchData3);
-        Colomn1matchesList.add(matchData4);
-        ColomnData colomnData1 = new ColomnData(Colomn1matchesList);
-        sectionList.add(colomnData1);
-        CompetitorData competitorNine = new CompetitorData("Manchester United Fc", "2");
-        CompetitorData competitorTen = new CompetitorData("Chelsea", "4");
-        CompetitorData competitorEleven = new CompetitorData("Liverpool", "2");
-        CompetitorData competitorTwelve = new CompetitorData("westham", "1");
-        MatchData matchData5 = new MatchData(competitorNine, competitorTen);
-        MatchData matchData6 = new MatchData(competitorEleven, competitorTwelve);
-        colomn2MatchesList.add(matchData5);
-        colomn2MatchesList.add(matchData6);
-        ColomnData colomnData2 = new ColomnData(colomn2MatchesList);
-        sectionList.add(colomnData2);
-        CompetitorData competitorThirteen = new CompetitorData("Chelsea", "2");
-        CompetitorData competitorForteen = new CompetitorData("Liverpool", "1");
-        MatchData matchData7 = new MatchData(competitorThirteen, competitorForteen);
-        colomn3MatchesList.add(matchData7);
-        ColomnData colomnData3 = new ColomnData(colomn3MatchesList);
-        sectionList.add(colomnData3);
-
     }
 
     private void intialiseViewPagerAdapter() {
 
-        sectionAdapter = new BracketsSectionAdapter(getChildFragmentManager(), this.sectionList);
+        sectionAdapter = new BracketsSectionAdapter(getChildFragmentManager(),
+                this.sectionList, bracketColor, textColor);
         viewPager.setOffscreenPageLimit(10);
         viewPager.setAdapter(sectionAdapter);
         viewPager.setCurrentItem(0);
@@ -116,7 +81,7 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
     private void initViews(View view) {
 
         viewPager = view.findViewById(R.id.container);
-
+        viewPager.setBackgroundColor(backgroundColor);
     }
 
     public int dpToPx(int dp) {
