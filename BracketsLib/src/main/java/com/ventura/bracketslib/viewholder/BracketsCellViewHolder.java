@@ -44,6 +44,8 @@ public class BracketsCellViewHolder extends RecyclerView.ViewHolder {
         teamTwoLayout.setBackgroundColor(bracketColor);
         teamOneName.setTextColor(textColor);
         teamTwoName.setTextColor(textColor);
+        teamOneScore.setTextColor(textColor);
+        teamTwoScore.setTextColor(textColor);
     }
 
     public void setAnimation(int height){
