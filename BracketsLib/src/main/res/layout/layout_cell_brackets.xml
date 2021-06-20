@@ -25,6 +25,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_toLeftOf="@+id/play_date"
                 android:alpha="0.3"
+                android:visibility="invisible"
                 android:text="Match title"
                 android:textColor="#ffffff"
                 android:gravity="bottom"
@@ -97,6 +98,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="35dp"
+            android:id="@+id/team_two_layout"
             android:background="@color/bracket_color"
             android:layout_below="@+id/view"
             android:layout_marginTop="1dp"

@@ -24,14 +24,26 @@ public class BracketsCellViewHolder extends RecyclerView.ViewHolder {
     private TextView teamTwoScore;
     private Animation animation;
     private RelativeLayout rootLayout;
+    private RelativeLayout teamOneLayout;
+    private RelativeLayout teamTwoLayout;
 
-    public BracketsCellViewHolder(View itemView) {
+    public BracketsCellViewHolder(View itemView, int bracketColor, int textColor) {
         super(itemView);
         teamOneName = (TextView) itemView.findViewById(R.id.team_one_name);
         teamTwoName = (TextView) itemView.findViewById(R.id.team_two_name);
         teamOneScore = (TextView) itemView.findViewById(R.id.team_one_score);
         teamTwoScore = (TextView) itemView.findViewById(R.id.team_two_score);
         rootLayout = (RelativeLayout) itemView.findViewById(R.id.layout_root);
+        teamOneLayout = (RelativeLayout) itemView.findViewById(R.id.team_one_layout);
+        teamTwoLayout = (RelativeLayout) itemView.findViewById(R.id.team_two_layout);
+        setViewColor(bracketColor, textColor);
+    }
+
+    private void setViewColor(int bracketColor, int textColor) {
+        teamOneLayout.setBackgroundColor(bracketColor);
+        teamTwoLayout.setBackgroundColor(bracketColor);
+        teamOneName.setTextColor(textColor);
+        teamTwoName.setTextColor(textColor);
     }
 
     public void setAnimation(int height){
@@ -57,5 +69,13 @@ public class BracketsCellViewHolder extends RecyclerView.ViewHolder {
 
     public TextView getTeamOneName() {
         return teamOneName;
+    }
+
+    public RelativeLayout getTeamOneLayout() {
+        return teamOneLayout;
+    }
+
+    public RelativeLayout getTeamTwoLayout() {
+        return teamTwoLayout;
     }
 }

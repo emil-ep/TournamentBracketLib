@@ -24,18 +24,18 @@ public class BracketsView extends FrameLayout {
     private BracketsFragment bracketFragment;
     private AppCompatActivity mActivity;
 
-    private int backgroundColor;
+    private int bracketBackground;
     private int bracketColor;
     private int textColor;
     private AttributeSet attrs;
     private int defStyleAttr;
 
-    public BracketsView(AppCompatActivity activity) {
-        super(activity);
-        this.mContext = activity;
-        this.mActivity = activity;
-        init();
-    }
+//    public BracketsView(AppCompatActivity activity) {
+//        super(activity);
+//        this.mContext = activity;
+//        this.mActivity = activity;
+//        init();
+//    }
 
     public BracketsView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -57,10 +57,22 @@ public class BracketsView extends FrameLayout {
         init();
     }
 
+    public void setBracketBackground(int bracketBackground) {
+        this.bracketBackground = bracketBackground;
+    }
+
+    public void setBracketColor(int bracketColor) {
+        this.bracketColor = bracketColor;
+    }
+
+    public void setTextColor(int textColor) {
+        this.textColor = textColor;
+    }
+
     private void initView(AttributeSet attrs) {
         TypedArray arr = mContext.obtainStyledAttributes(this.attrs,R.styleable.BracketsView,
                 this.defStyleAttr,0);
-        backgroundColor = arr.getColor(R.styleable.BracketsView_bracketBackgroundColor, 0);
+        bracketBackground = arr.getColor(R.styleable.BracketsView_bracketBackgroundColor, 0);
         bracketColor = arr.getColor(R.styleable.BracketsView_bracketColor, 0);
         textColor = arr.getColor(R.styleable.BracketsView_bracketTextColor, 0);
     }
@@ -72,7 +84,7 @@ public class BracketsView extends FrameLayout {
     }
 
     private void initialiseBracketsFragment() {
-        bracketFragment = new BracketsFragment(backgroundColor, bracketColor, textColor);
+        bracketFragment = new BracketsFragment(bracketBackground, bracketColor, textColor);
         FragmentManager manager = this.mActivity.getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.container, bracketFragment, "brackets_home_fragment");

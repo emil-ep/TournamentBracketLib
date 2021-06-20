@@ -18,18 +18,22 @@ import java.util.ArrayList;
 public class BracketsSectionAdapter extends FragmentStatePagerAdapter {
 
     private ArrayList<ColomnData> sectionList;
+    private int bracketColor, textColor;
 
 
-    public BracketsSectionAdapter(FragmentManager fm, ArrayList<ColomnData> sectionList) {
+    public BracketsSectionAdapter(FragmentManager fm, ArrayList<ColomnData> sectionList,
+                                  int bracketColor, int textColor) {
         super(fm);
         this.sectionList =sectionList;
+        this.bracketColor = bracketColor;
+        this.textColor = textColor;
     }
 
     @Override
     public Fragment getItem(int position) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("colomn_data", this.sectionList.get(position));
-        BracketsColomnFragment fragment = new BracketsColomnFragment();
+        BracketsColomnFragment fragment = new BracketsColomnFragment(bracketColor, textColor);
         bundle.putInt("section_number", position);
         if (position > 0)
             bundle.putInt("previous_section_size", sectionList.get(position - 1).getMatches().size());
