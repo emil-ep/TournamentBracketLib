@@ -50,7 +50,7 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
         intialiseViewPagerAdapter();
     }
 
-    public void setBrackets(int numberOfColumns, List<ColomnData> columnDataList) {
+    public void setBrackets(List<ColomnData> columnDataList) {
         sectionList = new ArrayList<>();
         sectionList.addAll(columnDataList);
 //        if (sectionAdapter != null)
