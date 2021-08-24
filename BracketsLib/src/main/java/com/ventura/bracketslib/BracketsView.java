@@ -8,7 +8,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -22,7 +22,7 @@ public class BracketsView extends FrameLayout {
     private View view;
     private Context mContext;
     private BracketsFragment bracketFragment;
-    private AppCompatActivity mActivity;
+    private FragmentActivity mActivity;
 
     private int bracketBackground;
     private int bracketColor;
@@ -40,7 +40,7 @@ public class BracketsView extends FrameLayout {
     public BracketsView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
-        this.mActivity = (AppCompatActivity) this.mContext;
+        this.mActivity = (FragmentActivity) this.mContext;
         this.attrs = attrs;
         initView(attrs);
         init();
@@ -50,7 +50,7 @@ public class BracketsView extends FrameLayout {
     public BracketsView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
-        this.mActivity = (AppCompatActivity) this.mContext;
+        this.mActivity = (FragmentActivity) this.mContext;
         this.attrs = attrs;
         this.defStyleAttr = defStyleAttr;
         initView(attrs);
