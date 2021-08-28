@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,6 +24,7 @@ public class BracketsView extends FrameLayout {
     private Context mContext;
     private BracketsFragment bracketFragment;
     private FragmentActivity mActivity;
+    private Fragment fragment;
 
     private int bracketBackground;
     private int bracketColor;
@@ -70,8 +72,8 @@ public class BracketsView extends FrameLayout {
     }
 
     private void initView(AttributeSet attrs) {
-        TypedArray arr = mContext.obtainStyledAttributes(this.attrs,R.styleable.BracketsView,
-                this.defStyleAttr,0);
+        TypedArray arr = mContext.obtainStyledAttributes(this.attrs, R.styleable.BracketsView,
+                this.defStyleAttr, 0);
         bracketBackground = arr.getColor(R.styleable.BracketsView_bracketBackgroundColor, 0);
         bracketColor = arr.getColor(R.styleable.BracketsView_bracketColor, 0);
         textColor = arr.getColor(R.styleable.BracketsView_bracketTextColor, 0);
@@ -85,14 +87,20 @@ public class BracketsView extends FrameLayout {
 
     private void initialiseBracketsFragment() {
         bracketFragment = new BracketsFragment(bracketBackground, bracketColor, textColor);
-        FragmentManager manager = this.mActivity.getSupportFragmentManager();
+        List<Fragment> fragments = this.mActivity.getSupportFragmentManager().getFragments();
+        FragmentManager manager;
+        if (fragments.size() != 0) {
+            manager = fragments.get(0).getChildFragmentManager();
+        } else
+            manager = this.mActivity.getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.container, bracketFragment, "brackets_home_fragment");
-        transaction.commit();
         manager.executePendingTransactions();
+        transaction.commit();
+
     }
 
-    public void setBracketsData(List<ColomnData> colomnList){
+    public void setBracketsData(List<ColomnData> colomnList) {
         bracketFragment.setBrackets(colomnList);
     }
 }
