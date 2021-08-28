@@ -13,7 +13,6 @@ import com.ventura.bracketslib.BracketsView;
 import com.ventura.bracketslib.model.ColomnData;
 import com.ventura.bracketslib.model.CompetitorData;
 import com.ventura.bracketslib.model.MatchData;
-import com.ventura.tournamentbracketslib.R;
 
 import java.util.Arrays;
 
