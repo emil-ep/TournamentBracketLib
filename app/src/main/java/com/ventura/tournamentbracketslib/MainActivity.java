@@ -7,24 +7,30 @@ import androidx.viewpager2.widget.ViewPager2;
 
 public class MainActivity extends FragmentActivity {
 
-    private ViewPager2 viewPager;
-    private FragmentStateAdapter adapter;
+//    private ViewPager2 viewPager;
+//    private FragmentStateAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initViews();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragment_container_view, ExampleFragment.class, null)
+                    .commit();
+        }
+//        initViews();
 //        initialiseBracketsFragment();
     }
+//
+//    private void initViews() {
+//        viewPager = findViewById(R.id.home_view_pager);
+//        adapter = new FragmentStateAdapter(this);
+//        viewPager.setAdapter(adapter);
+//    }
 
-    private void initViews() {
-        viewPager = findViewById(R.id.home_view_pager);
-        adapter = new FragmentStateAdapter(this);
-        viewPager.setAdapter(adapter);
-    }
-
-    private void initialiseBracketsFragment() {
+//    private void initialiseBracketsFragment() {
 //        BracketsView bracketsView = findViewById(R.id.bracket_view);
 //        CompetitorData brazilSemiFinal = new CompetitorData("Brazil", "3");
 //        CompetitorData englandSemiFinal = new CompetitorData("England", "1");
@@ -42,5 +48,5 @@ public class MainActivity extends FragmentActivity {
 //
 //        bracketsView.setBracketsData(Arrays.asList(semiFinalColomn, finalColomn));
 
-    }
+//    }
 }
