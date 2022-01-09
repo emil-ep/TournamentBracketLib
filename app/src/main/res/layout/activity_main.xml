@@ -7,10 +7,10 @@
     tools:context=".MainActivity">
 
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/home_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:id="@+id/home_view_pager"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
 
 <!--    <com.ventura.bracketslib.BracketsView-->
 <!--        android:id="@+id/bracket_view"-->
@@ -19,5 +19,11 @@
 <!--        app:bracketBackgroundColor="#1c222e"-->
 <!--        app:bracketColor="#262e40"-->
 <!--        app:bracketTextColor="#fff" />-->
+
+    <androidx.fragment.app.FragmentContainerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_container_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
