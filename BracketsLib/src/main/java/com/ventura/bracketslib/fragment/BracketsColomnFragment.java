@@ -1,21 +1,22 @@
 package com.ventura.bracketslib.fragment;
 
+import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.ventura.bracketslib.R;
+import com.ventura.bracketslib.databinding.FragmentBracketsColomnBinding;
 import com.ventura.bracketslib.adapter.BracketsCellAdapter;
 import com.ventura.bracketslib.model.ColomnData;
 import com.ventura.bracketslib.model.MatchData;
+import com.ventura.bracketslib.utility.BracketsUtility;
 
 import java.util.ArrayList;
 
@@ -25,39 +26,46 @@ import java.util.ArrayList;
 
 public class BracketsColomnFragment extends Fragment {
 
+    private FragmentBracketsColomnBinding binding;
     private ColomnData colomnData;
     private int sectionNumber = 0;
     private int previousBracketSize;
     private ArrayList<MatchData> list;
-    private RecyclerView bracketsRV;
-
     private BracketsCellAdapter adapter;
     private int bracketColor;
     private int textColor;
+
+    public BracketsColomnFragment() {
+    }
 
     public BracketsColomnFragment(int bracketColor, int textColor) {
         this.bracketColor = bracketColor;
         this.textColor = textColor;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getExtras();
+    }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_brackets_colomn, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentBracketsColomnBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initViews();
-        getExtras();
         initAdapter();
     }
 
-    private void initViews() {
-
-        bracketsRV = (RecyclerView) getView().findViewById(R.id.rv_score_board);
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     public ArrayList<MatchData> getColomnList() {
@@ -67,74 +75,80 @@ public class BracketsColomnFragment extends Fragment {
     private void getExtras() {
         if (getArguments() != null) {
             list = new ArrayList<>();
-            colomnData = (ColomnData) getArguments().getSerializable("colomn_data");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                colomnData = getArguments().getSerializable("colomn_data", ColomnData.class);
+            } else {
+                colomnData = (ColomnData) getArguments().getSerializable("colomn_data");
+            }
             sectionNumber = getArguments().getInt("section_number");
             previousBracketSize = getArguments().getInt("previous_section_size");
-            list.addAll(colomnData.getMatches());
+            if (colomnData != null && colomnData.getMatches() != null) {
+                list.addAll(colomnData.getMatches());
+            }
             setInitialHeightForList();
         }
     }
+
     public int getSectionNumber() {
         return sectionNumber;
     }
 
     private void setInitialHeightForList() {
-        for (MatchData data : list){
-            if (sectionNumber == 0){
-                data.setHeight(dpToPx(131));
-            }else if (sectionNumber == 1 && previousBracketSize != list.size()){
-                data.setHeight(dpToPx(262));
-            }else if (sectionNumber == 1 && previousBracketSize == list.size()) {
-                data.setHeight(dpToPx(131));
+        if (list == null) return;
+        for (MatchData data : list) {
+            if (sectionNumber == 0) {
+                data.setHeight(BracketsUtility.dpToPx(131));
+            } else if (sectionNumber == 1 && previousBracketSize != list.size()) {
+                data.setHeight(BracketsUtility.dpToPx(262));
+            } else if (sectionNumber == 1 && previousBracketSize == list.size()) {
+                data.setHeight(BracketsUtility.dpToPx(131));
             } else if (previousBracketSize > list.size()) {
-                data.setHeight(dpToPx(262));
-            }else if (previousBracketSize == list.size()) {
-                data.setHeight(dpToPx(131));
+                data.setHeight(BracketsUtility.dpToPx(262));
+            } else if (previousBracketSize == list.size()) {
+                data.setHeight(BracketsUtility.dpToPx(131));
             }
         }
-
-    }
-
-    private int dpToPx(int dp) {
-        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
-        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     public void expandHeight(int height) {
-
+        if (list == null) return;
         for (MatchData data : list) {
             data.setHeight(height);
         }
-        adapter.setList(list);
+        if (adapter != null) {
+            adapter.setList(list);
+        }
     }
 
     public void shrinkView(int height) {
+        if (list == null) return;
         for (MatchData data : list) {
             data.setHeight(height);
         }
-        adapter.setList(list);
-    }
-    private void initAdapter() {
-
-//        pBar.setVisibility(View.GONE);
-         adapter = new BracketsCellAdapter(this, getContext(), list);
-         adapter.setBracketColor(bracketColor);
-         adapter.setTextColor(textColor);
-        if (bracketsRV != null) {
-            bracketsRV.setHasFixedSize(true);
-            bracketsRV.setNestedScrollingEnabled(false);
-            bracketsRV.setAdapter(adapter);
-            bracketsRV.smoothScrollToPosition(0);
-            final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-            bracketsRV.setLayoutManager(layoutManager);
-            bracketsRV.setItemAnimator(new DefaultItemAnimator());
+        if (adapter != null) {
+            adapter.setList(list);
         }
     }
 
-    public int getCurrentBracketSize() {
-        return list.size();
+    private void initAdapter() {
+        if (binding == null || binding.rvScoreBoard == null) return;
+        adapter = new BracketsCellAdapter(this, getContext(), list);
+        adapter.setBracketColor(bracketColor);
+        adapter.setTextColor(textColor);
+        binding.rvScoreBoard.setHasFixedSize(true);
+        binding.rvScoreBoard.setNestedScrollingEnabled(false);
+        binding.rvScoreBoard.setAdapter(adapter);
+        binding.rvScoreBoard.smoothScrollToPosition(0);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        binding.rvScoreBoard.setLayoutManager(layoutManager);
+        binding.rvScoreBoard.setItemAnimator(new DefaultItemAnimator());
     }
+
+    public int getCurrentBracketSize() {
+        return list != null ? list.size() : 0;
+    }
+
     public int getPreviousBracketSize() {
         return previousBracketSize;
     }

@@ -23,8 +23,8 @@ public class BracketsSectionAdapter extends FragmentStatePagerAdapter {
 
     public BracketsSectionAdapter(FragmentManager fm, ArrayList<ColomnData> sectionList,
                                   int bracketColor, int textColor) {
-        super(fm);
-        this.sectionList =sectionList;
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        this.sectionList = sectionList;
         this.bracketColor = bracketColor;
         this.textColor = textColor;
     }
