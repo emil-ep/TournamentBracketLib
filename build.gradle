@@ -1,19 +1,12 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+// Top-level build file
 buildscript {
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
+        // Downgraded to 7.3.1 to support Java 11 for the build process
         classpath 'com.android.tools.build:gradle:7.3.1'
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
     }
 }
 
