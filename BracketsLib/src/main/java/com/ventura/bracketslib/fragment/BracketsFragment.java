@@ -13,8 +13,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.ventura.bracketslib.databinding.FragmentBracktsBinding;
 import com.ventura.bracketslib.adapter.BracketsSectionAdapter;
 import com.ventura.bracketslib.model.ColomnData;
-import com.ventura.bracketslib.model.CompetitorData;
-import com.ventura.bracketslib.model.MatchData;
 import com.ventura.bracketslib.utility.BracketsUtility;
 
 import java.util.ArrayList;
@@ -55,10 +53,9 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews();
-        if (sectionList == null || sectionList.isEmpty()) {
-            setData();
+        if (sectionList != null && !sectionList.isEmpty()) {
+            intialiseViewPagerAdapter();
         }
-        intialiseViewPagerAdapter();
     }
 
     @Override
@@ -67,62 +64,12 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
         binding = null;
     }
 
-    private void setData() {
-        sectionList = new ArrayList<>();
-        ArrayList<MatchData> colomn1matchesList = new ArrayList<>();
-        ArrayList<MatchData> colomn2MatchesList = new ArrayList<>();
-        ArrayList<MatchData> colomn3MatchesList = new ArrayList<>();
-
-        CompetitorData competitorOne = new CompetitorData("Manchester United Fc", "2");
-        CompetitorData competitorTwo = new CompetitorData("Arsenal", "1");
-        CompetitorData competitorThree = new CompetitorData("Chelsea", "2");
-        CompetitorData competitorFour = new CompetitorData("Tottenham", "1");
-        CompetitorData competitorFive = new CompetitorData("Manchester FC", "2");
-        CompetitorData competitorSix = new CompetitorData("Liverpool", "4");
-        CompetitorData competitorSeven = new CompetitorData("West ham ", "2");
-        CompetitorData competitorEight = new CompetitorData("Bayern munich", "1");
-
-        MatchData matchData1 = new MatchData(competitorOne, competitorTwo);
-        MatchData matchData2 = new MatchData(competitorThree, competitorFour);
-        MatchData matchData3 = new MatchData(competitorFive, competitorSix);
-        MatchData matchData4 = new MatchData(competitorSeven, competitorEight);
-
-        colomn1matchesList.add(matchData1);
-        colomn1matchesList.add(matchData2);
-        colomn1matchesList.add(matchData3);
-        colomn1matchesList.add(matchData4);
-
-        ColomnData colomnData1 = new ColomnData(colomn1matchesList);
-        sectionList.add(colomnData1);
-
-        CompetitorData competitorNine = new CompetitorData("Manchester United Fc", "2");
-        CompetitorData competitorTen = new CompetitorData("Chelsea", "4");
-        CompetitorData competitorEleven = new CompetitorData("Liverpool", "2");
-        CompetitorData competitorTwelve = new CompetitorData("westham", "1");
-
-        MatchData matchData5 = new MatchData(competitorNine, competitorTen);
-        MatchData matchData6 = new MatchData(competitorEleven, competitorTwelve);
-
-        colomn2MatchesList.add(matchData5);
-        colomn2MatchesList.add(matchData6);
-
-        ColomnData colomnData2 = new ColomnData(colomn2MatchesList);
-        sectionList.add(colomnData2);
-
-        CompetitorData competitorThirteen = new CompetitorData("Chelsea", "2");
-        CompetitorData competitorForteen = new CompetitorData("Liverpool", "1");
-
-        MatchData matchData7 = new MatchData(competitorThirteen, competitorForteen);
-
-        colomn3MatchesList.add(matchData7);
-
-        ColomnData colomnData3 = new ColomnData(colomn3MatchesList);
-        sectionList.add(colomnData3);
-    }
-
     public void setBrackets(List<ColomnData> columnDataList) {
         sectionList = new ArrayList<>();
         sectionList.addAll(columnDataList);
+        if (binding != null) {
+            intialiseViewPagerAdapter();
+        }
     }
 
     private void intialiseViewPagerAdapter() {
