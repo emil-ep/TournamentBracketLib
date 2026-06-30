@@ -156,7 +156,20 @@ public class BracketsFragment extends Fragment implements ViewPager.OnPageChange
 
     @Override
     public void onPageSelected(int position) {
+        BracketsColomnFragment selectedFragment = getBracketsFragment(position);
+        BracketsColomnFragment nextFragment = getBracketsFragment(position + 1);
 
+        if (selectedFragment != null) {
+            selectedFragment.shrinkView(BracketsUtility.dpToPx(131));
+        }
+        if (nextFragment != null) {
+            if (nextFragment.getCurrentBracketSize() != nextFragment.getPreviousBracketSize()) {
+                nextFragment.expandHeight(BracketsUtility.dpToPx(262));
+            } else {
+                nextFragment.shrinkView(BracketsUtility.dpToPx(131));
+            }
+        }
+        mNextSelectedScreen = position;
     }
 
     @Override
