@@ -22,13 +22,9 @@ public class SlideAnimation extends Animation {
 
     @Override
     protected void applyTransformation(float interpolatedTime, Transformation transformation) {
-        int newHeight;
-
-        if (mView.getHeight() != mToHeight) {
-            newHeight = (int) (mFromHeight + ((mToHeight - mFromHeight) * interpolatedTime));
-            mView.getLayoutParams().height = newHeight;
-            mView.requestLayout();
-        }
+        int newHeight = (int) (mFromHeight + ((mToHeight - mFromHeight) * interpolatedTime));
+        mView.getLayoutParams().height = newHeight;
+        mView.requestLayout();
     }
 
     @Override
