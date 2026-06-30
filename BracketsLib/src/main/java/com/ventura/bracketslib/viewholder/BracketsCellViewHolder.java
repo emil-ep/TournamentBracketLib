@@ -40,12 +40,14 @@ public class BracketsCellViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    public void setAnimation(int height){
-        animation = new SlideAnimation(binding.layoutRoot, binding.layoutRoot.getHeight(),
-                height);
+    public void setAnimation(int height) {
+        int currentHeight = binding.layoutRoot.getLayoutParams().height;
+        if (currentHeight <= 0) {
+            currentHeight = binding.layoutRoot.getHeight();
+        }
+        animation = new SlideAnimation(binding.layoutRoot, currentHeight, height);
         animation.setInterpolator(new LinearInterpolator());
         animation.setDuration(200);
-        binding.layoutRoot.setAnimation(animation);
         binding.layoutRoot.startAnimation(animation);
     }
 
