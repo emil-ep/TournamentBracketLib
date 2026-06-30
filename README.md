@@ -3,6 +3,7 @@ A library to generate tournament brackets with smooth transitions and animations
 
 https://user-images.githubusercontent.com/32976134/122669203-d7966c00-d1d9-11eb-8471-e88af082aeb3.mp4
 
+
 ## Requirements
 - Android 7.0 (API 24) and above
 
