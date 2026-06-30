@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_root"
-
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -25,8 +24,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_toLeftOf="@+id/play_date"
                 android:alpha="0.3"
-                android:visibility="invisible"
-                android:text="Match title"
+                android:visibility="gone"
                 android:textColor="#ffffff"
                 android:gravity="bottom"
                 android:paddingBottom="5dp"
@@ -52,19 +50,22 @@
             android:layout_below="@+id/title_layout"
             android:gravity="center">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/team_one_IV"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginStart="8dp"
+                android:visibility="gone"
+                app:shapeAppearanceOverlay="@style/CircleImageStyle"
+                app:strokeWidth="0dp" />
 
             <TextView
                 android:id="@+id/team_one_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="5dp"
                 android:paddingTop="5dp"
                 android:textColor="#ffffff"
                 android:paddingBottom="5dp"
@@ -104,18 +105,21 @@
             android:layout_marginTop="1dp"
             android:gravity="center">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/team_two_IV"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="5dp"
-                android:layout_centerVertical="true" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"
+                app:shapeAppearanceOverlay="@style/CircleImageStyle"
+                app:strokeWidth="0dp" />
 
             <TextView
                 android:id="@+id/team_two_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="8dp"
                 android:layout_toLeftOf="@+id/team_two_score"
                 android:layout_toRightOf="@+id/team_two_IV"
                 android:singleLine="true"

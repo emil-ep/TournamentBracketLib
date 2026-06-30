@@ -1,5 +1,6 @@
 package com.ventura.bracketslib.viewholder;
 
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.ventura.bracketslib.animation.SlideAnimation;
 import com.ventura.bracketslib.databinding.LayoutCellBracketsBinding;
 
@@ -51,6 +53,14 @@ public class BracketsCellViewHolder extends RecyclerView.ViewHolder {
         binding.layoutRoot.startAnimation(animation);
     }
 
+    public TextView getMatchTitle() {
+        return binding.teamTitle;
+    }
+
+    public TextView getTeamOneName() {
+        return binding.teamOneName;
+    }
+
     public TextView getTeamTwoName() {
         return binding.teamTwoName;
     }
@@ -63,7 +73,11 @@ public class BracketsCellViewHolder extends RecyclerView.ViewHolder {
         return binding.teamTwoScore;
     }
 
-    public TextView getTeamOneName() {
-        return binding.teamOneName;
+    public ShapeableImageView getTeamOneImage() {
+        return binding.teamOneIV;
+    }
+
+    public ShapeableImageView getTeamTwoImage() {
+        return binding.teamTwoIV;
     }
 }

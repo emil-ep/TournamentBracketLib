@@ -10,10 +10,19 @@ public class CompetitorData implements Serializable{
 
     private String name;
     private String score;
+    private String imageUrl;
 
-    public CompetitorData(String name, String score){
+    public CompetitorData(String name, String score) {
         this.name = name;
         this.score = score;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getScore() {
