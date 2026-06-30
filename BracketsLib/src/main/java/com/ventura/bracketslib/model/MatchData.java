@@ -11,6 +11,7 @@ public class MatchData implements Serializable{
     private CompetitorData competitorOne;
     private CompetitorData competitorTwo;
     private int height;
+    private String matchName;
 
     public int getHeight() {
         return height;
@@ -23,6 +24,14 @@ public class MatchData implements Serializable{
     public MatchData(CompetitorData competitorOne, CompetitorData competitorTwo) {
         this.competitorOne = competitorOne;
         this.competitorTwo = competitorTwo;
+    }
+
+    public String getMatchName() {
+        return matchName;
+    }
+
+    public void setMatchName(String matchName) {
+        this.matchName = matchName;
     }
 
     public CompetitorData getCompetitorTwo() {
